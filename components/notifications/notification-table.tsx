@@ -23,13 +23,15 @@ const columns = [
   { accessor: "createdAt", title: "Created At", width: 180 },
 ]
 
-const formatNotificationData = (notification: any): Notification => ({
-  id: notification.id,
-  Title: notification.Title || "N/A",
-  Message: notification.Message || "N/A",
-  RecipientId: notification.RecipientId || null,
-  IsRead: notification.IsRead || false,
-  createdAt: notification.createdAt || new Date().toISOString(),
+const formatNotificationData = (n: any): Notification => ({
+  id: n.NotificationId,
+  Title: n.Title ?? "N/A",
+  Message: n.Message ?? "N/A",
+  RecipientId: n.RecipientId ?? null,
+  IsRead: n.IsRead ?? false,
+  createdAt: n.CreatedDate
+    ? new Date(n.CreatedDate).toLocaleString()
+    : "N/A",
 })
 
 export function NotificationTable() {

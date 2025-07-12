@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback, useEffect } from "react"
+import { useState, useCallback, useEffect  } from "react"
 import { GenericTable } from "../shared/generic-table"
 import { AddHospitalModal } from "./add-hospital-modal"
 import api from "@/lib/api"
@@ -27,15 +27,15 @@ const columns = [
   { accessor: "established", title: "Established", width: 120 },
 ]
 
-const formatHospitalData = (hospital: any): Hospital => ({
-  id: hospital.id,
-  name: hospital.name || "N/A",
-  address: hospital.address || "N/A",
-  phone: hospital.phone || "N/A",
-  email: hospital.email || "N/A",
-  type: hospital.type || "N/A",
-  capacity: hospital.capacity || 0,
-  established: hospital.established || "N/A",
+const formatHospitalData = (h: any): Hospital => ({
+  id:          h.ID,
+  name:        h.hospitalName       ?? "N/A",
+  address:     h.town ?? h.municipality ?? h.region ?? "N/A",
+  phone:       h.phoneNumber ?? h.cellular ?? "N/A",
+  email:       h.email              ?? "N/A",
+  type:        h.categoryType ?? (h.isPrivate ? "Private" : "Public"),
+  capacity:    h.capacity           ?? 0,
+  established: h.established        ?? "N/A",
 })
 
 export function HospitalTable() {
